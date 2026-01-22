@@ -1,0 +1,956 @@
+{
+  "generated_at": "2026-01-21T23:13:34.353934",
+  "metrics": {
+    "mae": 328.29637080600526,
+    "rmse": 1355.2231285952657,
+    "r2": 0.8247491540994729,
+    "mape": 120.63914186786708
+  },
+  "channel_summary": [
+    {
+      "acquisition_channel": "organic_search",
+      "avg_ltv": 517.6,
+      "median_ltv": 2.27,
+      "ltv_std": 1978.61,
+      "player_count": 2035,
+      "avg_retention_prob": 0.25,
+      "avg_predicted_purchases": 0.86,
+      "avg_transaction_value": 39.17,
+      "ltv_10th_percentile": 540.12,
+      "ltv_90th_percentile": 1219.22,
+      "avg_cac": 0.0,
+      "ltv_cac_ratio": 51760.0
+    },
+    {
+      "acquisition_channel": "cross_promo",
+      "avg_ltv": 498.66,
+      "median_ltv": 2.38,
+      "ltv_std": 1919.3,
+      "player_count": 961,
+      "avg_retention_prob": 0.24,
+      "avg_predicted_purchases": 0.85,
+      "avg_transaction_value": 39.42,
+      "ltv_10th_percentile": 532.34,
+      "ltv_90th_percentile": 1199.42,
+      "avg_cac": 3.0,
+      "ltv_cac_ratio": 166.22
+    },
+    {
+      "acquisition_channel": "referral",
+      "avg_ltv": 714.0,
+      "median_ltv": 2.43,
+      "ltv_std": 2733.62,
+      "player_count": 1526,
+      "avg_retention_prob": 0.24,
+      "avg_predicted_purchases": 1.01,
+      "avg_transaction_value": 40.62,
+      "ltv_10th_percentile": 635.59,
+      "ltv_90th_percentile": 1380.59,
+      "avg_cac": 5.0,
+      "ltv_cac_ratio": 142.8
+    },
+    {
+      "acquisition_channel": "app_store",
+      "avg_ltv": 341.47,
+      "median_ltv": 2.34,
+      "ltv_std": 1299.16,
+      "player_count": 1452,
+      "avg_retention_prob": 0.24,
+      "avg_predicted_purchases": 0.67,
+      "avg_transaction_value": 37.83,
+      "ltv_10th_percentile": 442.37,
+      "ltv_90th_percentile": 1080.4,
+      "avg_cac": 8.0,
+      "ltv_cac_ratio": 42.68
+    },
+    {
+      "acquisition_channel": "paid_social",
+      "avg_ltv": 428.92,
+      "median_ltv": 2.28,
+      "ltv_std": 1652.65,
+      "player_count": 2547,
+      "avg_retention_prob": 0.24,
+      "avg_predicted_purchases": 0.76,
+      "avg_transaction_value": 39.26,
+      "ltv_10th_percentile": 500.62,
+      "ltv_90th_percentile": 1178.29,
+      "avg_cac": 12.5,
+      "ltv_cac_ratio": 34.31
+    },
+    {
+      "acquisition_channel": "influencer",
+      "avg_ltv": 455.12,
+      "median_ltv": 2.43,
+      "ltv_std": 1768.48,
+      "player_count": 1479,
+      "avg_retention_prob": 0.24,
+      "avg_predicted_purchases": 0.8,
+      "avg_transaction_value": 38.42,
+      "ltv_10th_percentile": 491.6,
+      "ltv_90th_percentile": 1114.3,
+      "avg_cac": 25.0,
+      "ltv_cac_ratio": 18.2
+    }
+  ],
+  "cohort_analysis": [
+    {
+      "month": 1,
+      "channel": "organic_search",
+      "cumulative_ltv": 90.9
+    },
+    {
+      "month": 1,
+      "channel": "cross_promo",
+      "cumulative_ltv": 87.57
+    },
+    {
+      "month": 1,
+      "channel": "referral",
+      "cumulative_ltv": 125.39
+    },
+    {
+      "month": 1,
+      "channel": "app_store",
+      "cumulative_ltv": 59.97
+    },
+    {
+      "month": 1,
+      "channel": "paid_social",
+      "cumulative_ltv": 75.33
+    },
+    {
+      "month": 1,
+      "channel": "influencer",
+      "cumulative_ltv": 79.93
+    },
+    {
+      "month": 2,
+      "channel": "organic_search",
+      "cumulative_ltv": 147.67
+    },
+    {
+      "month": 2,
+      "channel": "cross_promo",
+      "cumulative_ltv": 142.26
+    },
+    {
+      "month": 2,
+      "channel": "referral",
+      "cumulative_ltv": 203.7
+    },
+    {
+      "month": 2,
+      "channel": "app_store",
+      "cumulative_ltv": 97.42
+    },
+    {
+      "month": 2,
+      "channel": "paid_social",
+      "cumulative_ltv": 122.37
+    },
+    {
+      "month": 2,
+      "channel": "influencer",
+      "cumulative_ltv": 129.84
+    },
+    {
+      "month": 3,
+      "channel": "organic_search",
+      "cumulative_ltv": 196.13
+    },
+    {
+      "month": 3,
+      "channel": "cross_promo",
+      "cumulative_ltv": 188.96
+    },
+    {
+      "month": 3,
+      "channel": "referral",
+      "cumulative_ltv": 270.55
+    },
+    {
+      "month": 3,
+      "channel": "app_store",
+      "cumulative_ltv": 129.39
+    },
+    {
+      "month": 3,
+      "channel": "paid_social",
+      "cumulative_ltv": 162.53
+    },
+    {
+      "month": 3,
+      "channel": "influencer",
+      "cumulative_ltv": 172.46
+    },
+    {
+      "month": 4,
+      "channel": "organic_search",
+      "cumulative_ltv": 239.89
+    },
+    {
+      "month": 4,
+      "channel": "cross_promo",
+      "cumulative_ltv": 231.11
+    },
+    {
+      "month": 4,
+      "channel": "referral",
+      "cumulative_ltv": 330.91
+    },
+    {
+      "month": 4,
+      "channel": "app_store",
+      "cumulative_ltv": 158.26
+    },
+    {
+      "month": 4,
+      "channel": "paid_social",
+      "cumulative_ltv": 198.79
+    },
+    {
+      "month": 4,
+      "channel": "influencer",
+      "cumulative_ltv": 210.93
+    },
+    {
+      "month": 5,
+      "channel": "organic_search",
+      "cumulative_ltv": 280.44
+    },
+    {
+      "month": 5,
+      "channel": "cross_promo",
+      "cumulative_ltv": 270.18
+    },
+    {
+      "month": 5,
+      "channel": "referral",
+      "cumulative_ltv": 386.86
+    },
+    {
+      "month": 5,
+      "channel": "app_store",
+      "cumulative_ltv": 185.02
+    },
+    {
+      "month": 5,
+      "channel": "paid_social",
+      "cumulative_ltv": 232.39
+    },
+    {
+      "month": 5,
+      "channel": "influencer",
+      "cumulative_ltv": 246.59
+    },
+    {
+      "month": 6,
+      "channel": "organic_search",
+      "cumulative_ltv": 318.62
+    },
+    {
+      "month": 6,
+      "channel": "cross_promo",
+      "cumulative_ltv": 306.96
+    },
+    {
+      "month": 6,
+      "channel": "referral",
+      "cumulative_ltv": 439.52
+    },
+    {
+      "month": 6,
+      "channel": "app_store",
+      "cumulative_ltv": 210.2
+    },
+    {
+      "month": 6,
+      "channel": "paid_social",
+      "cumulative_ltv": 264.03
+    },
+    {
+      "month": 6,
+      "channel": "influencer",
+      "cumulative_ltv": 280.16
+    },
+    {
+      "month": 7,
+      "channel": "organic_search",
+      "cumulative_ltv": 354.92
+    },
+    {
+      "month": 7,
+      "channel": "cross_promo",
+      "cumulative_ltv": 341.93
+    },
+    {
+      "month": 7,
+      "channel": "referral",
+      "cumulative_ltv": 489.6
+    },
+    {
+      "month": 7,
+      "channel": "app_store",
+      "cumulative_ltv": 234.15
+    },
+    {
+      "month": 7,
+      "channel": "paid_social",
+      "cumulative_ltv": 294.11
+    },
+    {
+      "month": 7,
+      "channel": "influencer",
+      "cumulative_ltv": 312.08
+    },
+    {
+      "month": 8,
+      "channel": "organic_search",
+      "cumulative_ltv": 389.7
+    },
+    {
+      "month": 8,
+      "channel": "cross_promo",
+      "cumulative_ltv": 375.44
+    },
+    {
+      "month": 8,
+      "channel": "referral",
+      "cumulative_ltv": 537.57
+    },
+    {
+      "month": 8,
+      "channel": "app_store",
+      "cumulative_ltv": 257.1
+    },
+    {
+      "month": 8,
+      "channel": "paid_social",
+      "cumulative_ltv": 322.93
+    },
+    {
+      "month": 8,
+      "channel": "influencer",
+      "cumulative_ltv": 342.66
+    },
+    {
+      "month": 9,
+      "channel": "organic_search",
+      "cumulative_ltv": 423.19
+    },
+    {
+      "month": 9,
+      "channel": "cross_promo",
+      "cumulative_ltv": 407.7
+    },
+    {
+      "month": 9,
+      "channel": "referral",
+      "cumulative_ltv": 583.77
+    },
+    {
+      "month": 9,
+      "channel": "app_store",
+      "cumulative_ltv": 279.19
+    },
+    {
+      "month": 9,
+      "channel": "paid_social",
+      "cumulative_ltv": 350.68
+    },
+    {
+      "month": 9,
+      "channel": "influencer",
+      "cumulative_ltv": 372.11
+    },
+    {
+      "month": 10,
+      "channel": "organic_search",
+      "cumulative_ltv": 455.58
+    },
+    {
+      "month": 10,
+      "channel": "cross_promo",
+      "cumulative_ltv": 438.91
+    },
+    {
+      "month": 10,
+      "channel": "referral",
+      "cumulative_ltv": 628.45
+    },
+    {
+      "month": 10,
+      "channel": "app_store",
+      "cumulative_ltv": 300.56
+    },
+    {
+      "month": 10,
+      "channel": "paid_social",
+      "cumulative_ltv": 377.53
+    },
+    {
+      "month": 10,
+      "channel": "influencer",
+      "cumulative_ltv": 400.59
+    },
+    {
+      "month": 11,
+      "channel": "organic_search",
+      "cumulative_ltv": 487.01
+    },
+    {
+      "month": 11,
+      "channel": "cross_promo",
+      "cumulative_ltv": 469.19
+    },
+    {
+      "month": 11,
+      "channel": "referral",
+      "cumulative_ltv": 671.81
+    },
+    {
+      "month": 11,
+      "channel": "app_store",
+      "cumulative_ltv": 321.3
+    },
+    {
+      "month": 11,
+      "channel": "paid_social",
+      "cumulative_ltv": 403.57
+    },
+    {
+      "month": 11,
+      "channel": "influencer",
+      "cumulative_ltv": 428.23
+    },
+    {
+      "month": 12,
+      "channel": "organic_search",
+      "cumulative_ltv": 517.6
+    },
+    {
+      "month": 12,
+      "channel": "cross_promo",
+      "cumulative_ltv": 498.66
+    },
+    {
+      "month": 12,
+      "channel": "referral",
+      "cumulative_ltv": 714.0
+    },
+    {
+      "month": 12,
+      "channel": "app_store",
+      "cumulative_ltv": 341.47
+    },
+    {
+      "month": 12,
+      "channel": "paid_social",
+      "cumulative_ltv": 428.92
+    },
+    {
+      "month": 12,
+      "channel": "influencer",
+      "cumulative_ltv": 455.12
+    }
+  ],
+  "segment_distribution": [
+    {
+      "acquisition_channel": "app_store",
+      "player_segment": "dolphin",
+      "count": 117
+    },
+    {
+      "acquisition_channel": "app_store",
+      "player_segment": "free_to_play",
+      "count": 880
+    },
+    {
+      "acquisition_channel": "app_store",
+      "player_segment": "minnow",
+      "count": 429
+    },
+    {
+      "acquisition_channel": "app_store",
+      "player_segment": "whale",
+      "count": 26
+    },
+    {
+      "acquisition_channel": "cross_promo",
+      "player_segment": "dolphin",
+      "count": 80
+    },
+    {
+      "acquisition_channel": "cross_promo",
+      "player_segment": "free_to_play",
+      "count": 579
+    },
+    {
+      "acquisition_channel": "cross_promo",
+      "player_segment": "minnow",
+      "count": 284
+    },
+    {
+      "acquisition_channel": "cross_promo",
+      "player_segment": "whale",
+      "count": 18
+    },
+    {
+      "acquisition_channel": "influencer",
+      "player_segment": "dolphin",
+      "count": 117
+    },
+    {
+      "acquisition_channel": "influencer",
+      "player_segment": "free_to_play",
+      "count": 895
+    },
+    {
+      "acquisition_channel": "influencer",
+      "player_segment": "minnow",
+      "count": 439
+    },
+    {
+      "acquisition_channel": "influencer",
+      "player_segment": "whale",
+      "count": 28
+    },
+    {
+      "acquisition_channel": "organic_search",
+      "player_segment": "dolphin",
+      "count": 161
+    },
+    {
+      "acquisition_channel": "organic_search",
+      "player_segment": "free_to_play",
+      "count": 1257
+    },
+    {
+      "acquisition_channel": "organic_search",
+      "player_segment": "minnow",
+      "count": 576
+    },
+    {
+      "acquisition_channel": "organic_search",
+      "player_segment": "whale",
+      "count": 41
+    },
+    {
+      "acquisition_channel": "paid_social",
+      "player_segment": "dolphin",
+      "count": 196
+    },
+    {
+      "acquisition_channel": "paid_social",
+      "player_segment": "free_to_play",
+      "count": 1550
+    },
+    {
+      "acquisition_channel": "paid_social",
+      "player_segment": "minnow",
+      "count": 748
+    },
+    {
+      "acquisition_channel": "paid_social",
+      "player_segment": "whale",
+      "count": 53
+    },
+    {
+      "acquisition_channel": "referral",
+      "player_segment": "dolphin",
+      "count": 129
+    },
+    {
+      "acquisition_channel": "referral",
+      "player_segment": "free_to_play",
+      "count": 913
+    },
+    {
+      "acquisition_channel": "referral",
+      "player_segment": "minnow",
+      "count": 451
+    },
+    {
+      "acquisition_channel": "referral",
+      "player_segment": "whale",
+      "count": 33
+    }
+  ],
+  "survival_curves": [
+    {
+      "channel": "organic_search",
+      "day": 7,
+      "retention_rate": 24.3
+    },
+    {
+      "channel": "organic_search",
+      "day": 14,
+      "retention_rate": 23.7
+    },
+    {
+      "channel": "organic_search",
+      "day": 30,
+      "retention_rate": 22.6
+    },
+    {
+      "channel": "organic_search",
+      "day": 60,
+      "retention_rate": 20.6
+    },
+    {
+      "channel": "organic_search",
+      "day": 90,
+      "retention_rate": 19.0
+    },
+    {
+      "channel": "organic_search",
+      "day": 180,
+      "retention_rate": 15.5
+    },
+    {
+      "channel": "organic_search",
+      "day": 365,
+      "retention_rate": 12.0
+    },
+    {
+      "channel": "cross_promo",
+      "day": 7,
+      "retention_rate": 23.8
+    },
+    {
+      "channel": "cross_promo",
+      "day": 14,
+      "retention_rate": 23.3
+    },
+    {
+      "channel": "cross_promo",
+      "day": 30,
+      "retention_rate": 22.1
+    },
+    {
+      "channel": "cross_promo",
+      "day": 60,
+      "retention_rate": 20.3
+    },
+    {
+      "channel": "cross_promo",
+      "day": 90,
+      "retention_rate": 18.7
+    },
+    {
+      "channel": "cross_promo",
+      "day": 180,
+      "retention_rate": 15.3
+    },
+    {
+      "channel": "cross_promo",
+      "day": 365,
+      "retention_rate": 11.9
+    },
+    {
+      "channel": "influencer",
+      "day": 7,
+      "retention_rate": 23.7
+    },
+    {
+      "channel": "influencer",
+      "day": 14,
+      "retention_rate": 23.2
+    },
+    {
+      "channel": "influencer",
+      "day": 30,
+      "retention_rate": 22.1
+    },
+    {
+      "channel": "influencer",
+      "day": 60,
+      "retention_rate": 20.2
+    },
+    {
+      "channel": "influencer",
+      "day": 90,
+      "retention_rate": 18.7
+    },
+    {
+      "channel": "influencer",
+      "day": 180,
+      "retention_rate": 15.3
+    },
+    {
+      "channel": "influencer",
+      "day": 365,
+      "retention_rate": 11.9
+    },
+    {
+      "channel": "referral",
+      "day": 7,
+      "retention_rate": 23.3
+    },
+    {
+      "channel": "referral",
+      "day": 14,
+      "retention_rate": 22.8
+    },
+    {
+      "channel": "referral",
+      "day": 30,
+      "retention_rate": 21.7
+    },
+    {
+      "channel": "referral",
+      "day": 60,
+      "retention_rate": 19.9
+    },
+    {
+      "channel": "referral",
+      "day": 90,
+      "retention_rate": 18.4
+    },
+    {
+      "channel": "referral",
+      "day": 180,
+      "retention_rate": 15.1
+    },
+    {
+      "channel": "referral",
+      "day": 365,
+      "retention_rate": 11.8
+    },
+    {
+      "channel": "paid_social",
+      "day": 7,
+      "retention_rate": 23.9
+    },
+    {
+      "channel": "paid_social",
+      "day": 14,
+      "retention_rate": 23.4
+    },
+    {
+      "channel": "paid_social",
+      "day": 30,
+      "retention_rate": 22.2
+    },
+    {
+      "channel": "paid_social",
+      "day": 60,
+      "retention_rate": 20.4
+    },
+    {
+      "channel": "paid_social",
+      "day": 90,
+      "retention_rate": 18.8
+    },
+    {
+      "channel": "paid_social",
+      "day": 180,
+      "retention_rate": 15.3
+    },
+    {
+      "channel": "paid_social",
+      "day": 365,
+      "retention_rate": 11.9
+    },
+    {
+      "channel": "app_store",
+      "day": 7,
+      "retention_rate": 23.5
+    },
+    {
+      "channel": "app_store",
+      "day": 14,
+      "retention_rate": 23.0
+    },
+    {
+      "channel": "app_store",
+      "day": 30,
+      "retention_rate": 21.9
+    },
+    {
+      "channel": "app_store",
+      "day": 60,
+      "retention_rate": 20.1
+    },
+    {
+      "channel": "app_store",
+      "day": 90,
+      "retention_rate": 18.5
+    },
+    {
+      "channel": "app_store",
+      "day": 180,
+      "retention_rate": 15.2
+    },
+    {
+      "channel": "app_store",
+      "day": 365,
+      "retention_rate": 11.9
+    }
+  ],
+  "roi_analysis": [
+    {
+      "channel": "organic_search",
+      "cac": 0.0,
+      "ltv": 517.6,
+      "roi": 5176000.0,
+      "payback_days": 0.0
+    },
+    {
+      "channel": "cross_promo",
+      "cac": 3.0,
+      "ltv": 498.66,
+      "roi": 16522.0,
+      "payback_days": 2.0
+    },
+    {
+      "channel": "referral",
+      "cac": 5.0,
+      "ltv": 714.0,
+      "roi": 14180.0,
+      "payback_days": 3.0
+    },
+    {
+      "channel": "app_store",
+      "cac": 8.0,
+      "ltv": 341.47,
+      "roi": 4168.4,
+      "payback_days": 9.0
+    },
+    {
+      "channel": "paid_social",
+      "cac": 12.5,
+      "ltv": 428.92,
+      "roi": 3331.4,
+      "payback_days": 11.0
+    },
+    {
+      "channel": "influencer",
+      "cac": 25.0,
+      "ltv": 455.12,
+      "roi": 1720.5,
+      "payback_days": 20.0
+    }
+  ],
+  "feature_importance": [
+    {
+      "feature": "frequency",
+      "importance": 0.7777884371077337
+    },
+    {
+      "feature": "monetary_mean",
+      "importance": 0.20772708494668174
+    },
+    {
+      "feature": "monetary_max",
+      "importance": 0.01259239009440824
+    },
+    {
+      "feature": "monetary_std",
+      "importance": 0.0015250050409877898
+    },
+    {
+      "feature": "purchase_velocity",
+      "importance": 0.00015692207738188265
+    },
+    {
+      "feature": "early_7d_spend",
+      "importance": 5.843476114277005e-05
+    },
+    {
+      "feature": "customer_lifespan",
+      "importance": 3.082850174036489e-05
+    },
+    {
+      "feature": "total_playtime",
+      "importance": 1.9293460634879087e-05
+    },
+    {
+      "feature": "total_sessions",
+      "importance": 1.7543163885225467e-05
+    },
+    {
+      "feature": "engagement_consistency",
+      "importance": 1.4001304870122891e-05
+    },
+    {
+      "feature": "social_ratio",
+      "importance": 1.2299387183024703e-05
+    },
+    {
+      "feature": "age",
+      "importance": 1.2204567882325391e-05
+    },
+    {
+      "feature": "cac",
+      "importance": 1.1529206012697567e-05
+    },
+    {
+      "feature": "tenure_days",
+      "importance": 1.0318623979480185e-05
+    },
+    {
+      "feature": "recency_days",
+      "importance": 6.983711138802929e-06
+    }
+  ],
+  "ltv_distribution": [
+    {
+      "channel": "organic_search",
+      "min": 0.1,
+      "q25": 1.8,
+      "median": 2.27,
+      "q75": 332.97,
+      "max": 1998.47,
+      "mean": 517.6
+    },
+    {
+      "channel": "cross_promo",
+      "min": 0.12,
+      "q25": 1.83,
+      "median": 2.38,
+      "q75": 336.26,
+      "max": 1835.3,
+      "mean": 498.66
+    },
+    {
+      "channel": "influencer",
+      "min": 0.12,
+      "q25": 1.81,
+      "median": 2.43,
+      "q75": 301.42,
+      "max": 1747.21,
+      "mean": 455.12
+    },
+    {
+      "channel": "referral",
+      "min": 0.11,
+      "q25": 1.81,
+      "median": 2.43,
+      "q75": 412.76,
+      "max": 2563.23,
+      "mean": 714.0
+    },
+    {
+      "channel": "paid_social",
+      "min": 0.12,
+      "q25": 1.81,
+      "median": 2.28,
+      "q75": 276.56,
+      "max": 1613.44,
+      "mean": 428.92
+    },
+    {
+      "channel": "app_store",
+      "min": 0.14,
+      "q25": 1.8,
+      "median": 2.34,
+      "q75": 222.63,
+      "max": 1404.69,
+      "mean": 341.47
+    }
+  ],
+  "total_players": 10000,
+  "total_predicted_ltv": 4883470.91,
+  "avg_ltv": 488.35
+}

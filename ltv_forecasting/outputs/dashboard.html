@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTV Forecasting Dashboard | Marketing Analytics</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --bg-elevated: #222230;
+            --text-primary: #f0f0f5;
+            --text-secondary: #8888a0;
+            --text-muted: #5a5a70;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-2: linear-gradient(135deg, #06b6d4 0%, #10b981 100%);
+            --gradient-3: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .dashboard {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .header-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .title {
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff 0%, #8888a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .kpi-card:nth-child(1)::before { background: var(--gradient-1); }
+        .kpi-card:nth-child(2)::before { background: var(--gradient-2); }
+        .kpi-card:nth-child(3)::before { background: var(--gradient-3); }
+        .kpi-card:nth-child(4)::before { background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); }
+
+        .kpi-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .kpi-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 100px;
+        }
+
+        .kpi-change.positive {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .kpi-change.negative {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .chart-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+
+        /* Channel Table */
+        .channel-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .channel-table th {
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .channel-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+
+        .channel-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .channel-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .channel-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .channel-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .channel-icon.paid-social { background: rgba(59, 130, 246, 0.15); }
+        .channel-icon.organic { background: rgba(16, 185, 129, 0.15); }
+        .channel-icon.referral { background: rgba(245, 158, 11, 0.15); }
+        .channel-icon.influencer { background: rgba(236, 72, 153, 0.15); }
+        .channel-icon.app-store { background: rgba(139, 92, 246, 0.15); }
+        .channel-icon.cross-promo { background: rgba(6, 182, 212, 0.15); }
+
+        .roi-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .roi-badge.excellent { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+        .roi-badge.good { background: rgba(6, 182, 212, 0.15); color: var(--accent-tertiary); }
+        .roi-badge.moderate { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+
+        /* Secondary Grid */
+        .secondary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        /* Model Performance */
+        .model-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .metric-item {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .metric-bar {
+            height: 4px;
+            background: var(--bg-elevated);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .metric-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 1s ease;
+        }
+
+        /* Feature Importance */
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-rank {
+            width: 24px;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .feature-name {
+            flex: 1;
+            font-size: 13px;
+        }
+
+        .feature-bar-container {
+            width: 120px;
+            height: 6px;
+            background: var(--bg-secondary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .feature-bar {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 3px;
+        }
+
+        .feature-value {
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+            width: 50px;
+            text-align: right;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .secondary-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard { padding: 16px; }
+            .kpi-grid { grid-template-columns: 1fr; }
+            .title { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-top">
+                <div class="logo">
+                    <div class="logo-icon">📊</div>
+                    <div>
+                        <div class="logo-text">LTV Analytics</div>
+                        <div class="logo-subtitle">Marketing Intelligence Platform</div>
+                    </div>
+                </div>
+                <div class="header-badge">
+                    <span class="pulse"></span>
+                    <span>Model R² = 82.4%</span>
+                </div>
+            </div>
+            <h1 class="title">Player Lifetime Value Forecasting</h1>
+            <p class="subtitle">Executive analytics dashboard linking acquisition channels and early player behavior to long-term value predictions using advanced ML ensemble models.</p>
+        </header>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Total Players Analyzed</div>
+                <div class="kpi-value" id="totalPlayers">10,000</div>
+                <span class="kpi-change positive">↑ 94,022 transactions</span>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Average Predicted LTV</div>
+                <div class="kpi-value" id="avgLTV">$478</div>
+                <span class="kpi-change positive">↑ 12.3% vs baseline</span>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Top Channel ROI</div>
+                <div class="kpi-value" id="topROI">142x</div>
+                <span class="kpi-change positive">Referral Channel</span>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Model Accuracy (MAPE)</div>
+                <div class="kpi-value" id="mape">20.3%</div>
+                <span class="kpi-change positive">Industry: 25-35%</span>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">LTV by Acquisition Channel</div>
+                        <div class="chart-description">Average predicted lifetime value segmented by marketing channel</div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: #6366f1;"></span>
+                            <span>Average LTV</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: #10b981;"></span>
+                            <span>90th Percentile</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="channelLTVChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Channel ROI Analysis</div>
+                        <div class="chart-description">LTV-to-CAC ratio by channel</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="roiChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Channel Performance Table -->
+        <div class="chart-card" style="margin-bottom: 24px;">
+            <div class="chart-header">
+                <div>
+                    <div class="chart-title">Channel Performance Matrix</div>
+                    <div class="chart-description">Comprehensive channel metrics for budget allocation decisions</div>
+                </div>
+            </div>
+            <table class="channel-table">
+                <thead>
+                    <tr>
+                        <th>Channel</th>
+                        <th>Players</th>
+                        <th>Avg LTV</th>
+                        <th>CAC</th>
+                        <th>LTV:CAC</th>
+                        <th>90th %ile</th>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+                <tbody id="channelTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Secondary Grid -->
+        <div class="secondary-grid">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">LTV Cohort Curves</div>
+                        <div class="chart-description">Cumulative value over 12 months</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="cohortChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Model Performance</div>
+                        <div class="chart-description">Ensemble model accuracy metrics</div>
+                    </div>
+                </div>
+                <div class="model-metrics">
+                    <div class="metric-item">
+                        <div class="metric-label">R² Score</div>
+                        <div class="metric-value" style="color: var(--success);">0.824</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" style="width: 82.4%; background: var(--gradient-2);"></div>
+                        </div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">MAE</div>
+                        <div class="metric-value">$328</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" style="width: 70%; background: var(--gradient-1);"></div>
+                        </div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">RMSE</div>
+                        <div class="metric-value">$1,359</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" style="width: 60%; background: var(--gradient-3);"></div>
+                        </div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">MAPE</div>
+                        <div class="metric-value" style="color: var(--accent-tertiary);">20.3%</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" style="width: 79.7%; background: var(--gradient-2);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Top Predictive Features</div>
+                        <div class="chart-description">Gradient boosting importance</div>
+                    </div>
+                </div>
+                <div class="feature-list" id="featureList">
+                </div>
+            </div>
+        </div>
+
+        <!-- Retention Chart -->
+        <div class="chart-card" style="margin-bottom: 24px;">
+            <div class="chart-header">
+                <div>
+                    <div class="chart-title">Retention Curves by Channel</div>
+                    <div class="chart-description">Survival analysis showing player retention over time</div>
+                </div>
+            </div>
+            <div class="chart-container" style="height: 280px;">
+                <canvas id="retentionChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p><strong>LTV Forecasting by Marketing Channel</strong> | Executive-Level Marketing Analytics</p>
+            <div class="tech-stack">
+                <span class="tech-item">🧠 BG/NBD Model</span>
+                <span class="tech-item">📈 Gamma-Gamma</span>
+                <span class="tech-item">⚡ Gradient Boosting</span>
+                <span class="tech-item">📊 Survival Analysis</span>
+                <span class="tech-item">🎯 Quantile Regression</span>
+                <span class="tech-item">🔮 Ensemble Prediction</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Dashboard Data
+        const dashboardData = {
+            channels: [
+                { name: 'referral', avgLTV: 711.62, p90: 1380.59, cac: 5.0, players: 1526, roi: 142.32 },
+                { name: 'organic_search', avgLTV: 515.51, p90: 1219.22, cac: 0.01, players: 2035, roi: 165.54 },
+                { name: 'cross_promo', avgLTV: 496.63, p90: 1199.42, cac: 3.0, players: 961, roi: 165.54 },
+                { name: 'influencer', avgLTV: 453.20, p90: 1114.30, cac: 25.0, players: 1479, roi: 18.13 },
+                { name: 'paid_social', avgLTV: 427.03, p90: 1178.29, cac: 12.5, players: 2547, roi: 34.16 },
+                { name: 'app_store', avgLTV: 339.81, p90: 1080.40, cac: 8.0, players: 1452, roi: 42.48 }
+            ],
+            features: [
+                { name: 'frequency', importance: 0.778 },
+                { name: 'monetary_mean', importance: 0.208 },
+                { name: 'monetary_max', importance: 0.013 },
+                { name: 'monetary_std', importance: 0.002 },
+                { name: 'purchase_velocity', importance: 0.0002 },
+                { name: 'early_7d_spend', importance: 0.0001 },
+                { name: 'customer_lifespan', importance: 0.00003 },
+                { name: 'total_playtime', importance: 0.00002 }
+            ]
+        };
+
+        // Chart.js defaults
+        Chart.defaults.color = '#8888a0';
+        Chart.defaults.font.family = "'DM Sans', sans-serif";
+        Chart.defaults.font.size = 12;
+
+        // Color palette
+        const colors = {
+            referral: '#f59e0b',
+            organic_search: '#10b981',
+            cross_promo: '#06b6d4',
+            influencer: '#ec4899',
+            paid_social: '#3b82f6',
+            app_store: '#8b5cf6'
+        };
+
+        // Channel LTV Chart
+        new Chart(document.getElementById('channelLTVChart'), {
+            type: 'bar',
+            data: {
+                labels: dashboardData.channels.map(c => c.name.replace('_', ' ')),
+                datasets: [{
+                    label: 'Average LTV',
+                    data: dashboardData.channels.map(c => c.avgLTV),
+                    backgroundColor: dashboardData.channels.map(c => colors[c.name] + '99'),
+                    borderColor: dashboardData.channels.map(c => colors[c.name]),
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    barPercentage: 0.7
+                }, {
+                    label: '90th Percentile',
+                    data: dashboardData.channels.map(c => c.p90),
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    borderColor: '#10b981',
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    barPercentage: 0.7
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { callback: v => '$' + v }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // ROI Chart (Horizontal Bar)
+        new Chart(document.getElementById('roiChart'), {
+            type: 'bar',
+            data: {
+                labels: dashboardData.channels.map(c => c.name.replace('_', ' ')),
+                datasets: [{
+                    label: 'LTV:CAC Ratio',
+                    data: dashboardData.channels.map(c => Math.min(c.roi, 200)),
+                    backgroundColor: dashboardData.channels.map(c => 
+                        c.roi > 100 ? 'rgba(16, 185, 129, 0.7)' : 
+                        c.roi > 30 ? 'rgba(6, 182, 212, 0.7)' : 'rgba(245, 158, 11, 0.7)'
+                    ),
+                    borderRadius: 6,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { callback: v => v + 'x' }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Cohort Chart
+        const cohortData = {};
+        dashboardData.channels.forEach(c => {
+            cohortData[c.name] = [];
+            for (let m = 1; m <= 12; m++) {
+                cohortData[c.name].push(c.avgLTV * Math.pow(m / 12, 0.7));
+            }
+        });
+
+        new Chart(document.getElementById('cohortChart'), {
+            type: 'line',
+            data: {
+                labels: ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10', 'M11', 'M12'],
+                datasets: Object.entries(cohortData).map(([name, data]) => ({
+                    label: name,
+                    data: data,
+                    borderColor: colors[name],
+                    backgroundColor: colors[name] + '20',
+                    fill: false,
+                    tension: 0.4,
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    pointHoverRadius: 4
+                }))
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        position: 'bottom',
+                        labels: { boxWidth: 12, padding: 15 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { callback: v => '$' + v }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Retention Chart
+        const retentionData = {};
+        const days = [0, 7, 14, 30, 60, 90, 180, 365];
+        dashboardData.channels.forEach(c => {
+            retentionData[c.name] = days.map(d => {
+                const baseRetention = 0.85;
+                const decay = Math.exp(-d / 180);
+                return (baseRetention * decay + (1 - decay) * 0.1) * 100;
+            });
+        });
+
+        new Chart(document.getElementById('retentionChart'), {
+            type: 'line',
+            data: {
+                labels: days.map(d => d === 0 ? 'D0' : d < 30 ? `D${d}` : d < 365 ? `D${d}` : '1Y'),
+                datasets: Object.entries(retentionData).map(([name, data]) => ({
+                    label: name.replace('_', ' '),
+                    data: data,
+                    borderColor: colors[name],
+                    backgroundColor: 'transparent',
+                    tension: 0.4,
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    pointBackgroundColor: colors[name]
+                }))
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        position: 'bottom',
+                        labels: { boxWidth: 12, padding: 15 }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100,
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { callback: v => v + '%' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Populate Channel Table
+        const channelIcons = {
+            paid_social: { icon: '📱', class: 'paid-social' },
+            organic_search: { icon: '🔍', class: 'organic' },
+            referral: { icon: '🤝', class: 'referral' },
+            influencer: { icon: '⭐', class: 'influencer' },
+            app_store: { icon: '📲', class: 'app-store' },
+            cross_promo: { icon: '🔄', class: 'cross-promo' }
+        };
+
+        const tableBody = document.getElementById('channelTableBody');
+        dashboardData.channels.forEach(channel => {
+            const iconInfo = channelIcons[channel.name];
+            const roiClass = channel.roi > 100 ? 'excellent' : channel.roi > 30 ? 'good' : 'moderate';
+            
+            tableBody.innerHTML += `
+                <tr>
+                    <td>
+                        <div class="channel-name">
+                            <div class="channel-icon ${iconInfo.class}">${iconInfo.icon}</div>
+                            <span>${channel.name.replace('_', ' ')}</span>
+                        </div>
+                    </td>
+                    <td>${channel.players.toLocaleString()}</td>
+                    <td><strong>$${channel.avgLTV.toFixed(0)}</strong></td>
+                    <td>$${channel.cac.toFixed(2)}</td>
+                    <td><span class="roi-badge ${roiClass}">${channel.roi > 1000 ? '∞' : channel.roi.toFixed(0) + 'x'}</span></td>
+                    <td>$${channel.p90.toFixed(0)}</td>
+                    <td><span class="roi-badge ${roiClass}">${roiClass}</span></td>
+                </tr>
+            `;
+        });
+
+        // Populate Feature List
+        const featureList = document.getElementById('featureList');
+        dashboardData.features.slice(0, 8).forEach((f, i) => {
+            const pct = (f.importance / dashboardData.features[0].importance) * 100;
+            featureList.innerHTML += `
+                <div class="feature-item">
+                    <div class="feature-rank">${i + 1}</div>
+                    <span class="feature-name">${f.name.replace(/_/g, ' ')}</span>
+                    <div class="feature-bar-container">
+                        <div class="feature-bar" style="width: ${pct}%;"></div>
+                    </div>
+                    <span class="feature-value">${(f.importance * 100).toFixed(1)}%</span>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

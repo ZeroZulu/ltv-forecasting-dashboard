@@ -1,0 +1,25 @@
+# LTV Forecasting - Requirements
+# Python 3.8+
+
+# Core Scientific Computing
+numpy>=1.21.0
+pandas>=1.3.0
+scipy>=1.7.0
+
+# Machine Learning
+scikit-learn>=1.0.0
+
+# Dashboard & Visualization
+streamlit>=1.28.0
+plotly>=5.15.0
+
+# Optional: Enhanced Models (uncomment if using)
+# xgboost>=1.5.0
+# lightgbm>=3.3.0
+# lifetimes>=0.11.0  # Alternative BG/NBD implementation
+
+# Development (optional)
+# jupyter>=1.0.0
+# matplotlib>=3.4.0
+# seaborn>=0.11.0
+# pytest>=6.0.0
